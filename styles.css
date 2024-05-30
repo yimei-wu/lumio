@@ -9,7 +9,9 @@ body {
     background-color: rgb(8, 8, 8);
     color: aliceblue;
     width: 100%;
-    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 }
 
 .bg-px-container {
