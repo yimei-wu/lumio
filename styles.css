@@ -1,0 +1,73 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+}
+/* END RESET */
+
+body {
+    background-color: rgb(8, 8, 8);
+    color: aliceblue;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.bg-px-container {
+    display: flex;
+    width: 300vw;
+}
+.bg-px-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    height: 100lvh;
+    overflow: hidden;
+}
+.bg-px-layer {
+    position: absolute;
+    height: 80lvh;
+    width: 100vw;
+    background-position: center bottom;
+    background-size: cover;
+    background-attachment: scroll;
+}
+#bg-forest-1 {
+    background-image: url(./src/image/Background_Foresta_1-1.png);
+}
+#bg-forest-2 {
+    background-image: url(./src/image/Background_Foresta_1-2.png);
+    opacity: 0.6;
+    z-index: 2;
+}
+#bg-forest-3 {
+    background-image: url(./src/image/Background_Foresta_1-3.png);
+    opacity: 0.4;
+    z-index: 3;
+}
+#bg2-forest-1 {
+    background-image: url(./src/image/Background_Foresta_3-1.png);
+}
+#bg2-forest-2 {
+    background-image: url(./src/image/Background_Foresta_3-2.png);
+    opacity: 0.6;
+    z-index: 2;
+}
+#bg2-forest-3 {
+    background-image: url(./src/image/Background_Foresta_3-3.png);
+    opacity: 0.4;
+    z-index: 3;
+}
+#bg3-forest-1 {
+    background-image: url(./src/image/Background_Foresta_2-1.png);
+}
+#bg3-forest-2 {
+    background-image: url(./src/image/Background_Foresta_2-2.png);
+    opacity: 0.6;
+    z-index: 2;
+}
+#bg3-forest-3 {
+    background-image: url(./src/image/Background_Foresta_2-3.png);
+    opacity: 0.4;
+    z-index: 3;
+}
