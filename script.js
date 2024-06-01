@@ -23,6 +23,4 @@ lenis.on("scroll", (e) => {
   });
 });
 
-// window.addEventListener("scroll", function () {
-
-// });
+window.addEventListener("scroll", function () {});
