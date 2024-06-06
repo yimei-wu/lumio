@@ -6,7 +6,7 @@
 /* END RESET */
 
 body {
-    width: 100%;
+    width: 400vw;
     height: 100vh;
     color: #fff;
     perspective: 1px;
@@ -31,10 +31,10 @@ body {
 .bg-px-layer {
     position: absolute;
     height: 80lvh;
-    width: 100vw;
+    width: 100%;
     background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-attachment: scroll;
 }
 #bg-forest-1 {
@@ -48,4 +48,18 @@ body {
 #bg-forest-3 {
     background-image: url(./src/image/Background_Foresta-3.png);
     z-index: 3;
+}
+
+.lumio {
+    position: fixed;
+    z-index: 10;
+    bottom: 20%;
+    left: 0;
+}
+
+.lumio img {
+
+    height: 200px;
+    width: auto;
+
 }
