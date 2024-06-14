@@ -1,7 +1,7 @@
 import "./main.css";
 import gsap from "gsap";
 import Lenis from "lenis";
-import { debounce } from "lodash";
+import { debounce, head } from "lodash";
 
 const lenis = new Lenis({
   orientation: "horizontal",
@@ -21,10 +21,13 @@ const screen = {
 
 let startTime = null;
 
-window.lumio = {
+const lumio = {
   el: document.querySelector("#lumio"),
-  img: document.querySelector("#lumio img"),
+  img: document.querySelector("#lumio #body"),
+  head: document.querySelector("#lumio #head"),
+  headTracker: document.querySelector("#lumio #head-tracker"),
   animate: false,
+  direction: 1,
   frames: 3, // lumio-1.png, lumio-2.png, lumio-3.png
   speed: 500, // mezzo secondo
 };
@@ -34,6 +37,7 @@ const init = () => {
 
   requestAnimationFrame(animate);
   document.addEventListener("click", handleClick);
+  document.addEventListener("mousemove", handleMouseMove);
   window.addEventListener("resize", handleResize);
   lenis.on("scroll", handleScroll);
   scrollStartStopHandler(window, 100, handleScrollStart, handleScrollStop);
@@ -50,8 +54,10 @@ const handleClick = (event) => {
   const duration = gsap.utils.mapRange(0, 100, 0.5, 5, distance);
 
   if (direction == 1) {
+    lumio.direction = 1;
     lumio.el.style.setProperty("--scale", "1");
   } else {
+    lumio.direction = -1;
     lumio.el.style.setProperty("--scale", "-1");
   }
 
@@ -69,7 +75,7 @@ const handleClick = (event) => {
     onComplete: () => {
       lumio.animate = false;
       lumio.img.dataset.frame = 1;
-      lumio.img.src = `/lumio/lumio-1.png`;
+      lumio.img.src = `/lumio/lumio-headless-1.png`;
       lenis.start();
     },
   });
@@ -95,9 +101,12 @@ const handleResize = () => {
 
 const handleScroll = () => {
   // Giro Lumio in base alla direzione dello scroll
+
   if (lenis.direction == -1) {
+    lumio.direction = -1;
     lumio.el.style.setProperty("--scale", "-1");
   } else {
+    lumio.direction = 1;
     lumio.el.style.setProperty("--scale", "1");
   }
 
@@ -121,7 +130,38 @@ const handleScrollStop = () => {
   // Disattivo l'animazione di Lumio
   lumio.animate = false;
   lumio.img.dataset.frame = 1;
-  lumio.img.src = `/lumio/lumio-1.png`;
+  lumio.img.src = `/lumio/lumio-headless-1.png`;
+};
+
+const handleMouseMove = (event) => {
+  const mouse = {
+    x: event.clientX,
+    y: event.clientY,
+    direction: event.clientX < screen.width / 2 ? -1 : 1, // -1 sinistra, 1 destra
+  };
+
+  const headRect = lumio.headTracker.getBoundingClientRect();
+  const headCenterX = headRect.left + headRect.width / 2;
+  const headCenterY = headRect.top + headRect.height / 2;
+
+  let deltaX = mouse.x - headCenterX;
+  let deltaY = mouse.y - headCenterY;
+
+  if (lumio.direction == -1) {
+    deltaX = -deltaX;
+  }
+
+  let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+  if (lumio.direction == mouse.direction) {
+    gsap.set(lumio.head, {
+      rotateZ: gsap.utils.clamp(-30, 50, angle),
+    });
+  } else {
+    gsap.to(lumio.head, {
+      rotateZ: 0,
+    });
+  }
 };
 
 const animate = (time) => {
@@ -137,7 +177,7 @@ const animate = (time) => {
     const frame =
       Math.floor((relativeProgress * lumio.frames) % lumio.frames) + 1;
     lumio.img.dataset.frame = frame;
-    lumio.img.src = `/lumio/lumio-${frame}.png`;
+    lumio.img.src = `/lumio/lumio-headless-${frame}.png`;
   }
 
   lenis.raf(time);

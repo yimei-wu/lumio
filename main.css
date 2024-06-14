@@ -53,6 +53,14 @@ body::-webkit-scrollbar {
   height: 30svh;
 }
 
+#lumio #head {
+  position: absolute;
+}
+
+#lumio #head-tracker {
+  @apply absolute -translate-x-1/2 top-[30%] z-30 left-1/2 size-4;
+}
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
