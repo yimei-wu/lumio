@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumio</title>
-    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="main.js"></script>
   </head>
   <body>
-    <div class="lumio"><img src="./src/image/Lumio_1.png" alt="" /></div>
-    <div class="bg-px-container">
-      <div class="bg-px-section">
-        <div class="bg-px-layer" id="bg-forest-1"></div>
-        <div class="bg-px-layer" id="bg-forest-2"></div>
-        <div class="bg-px-layer" id="bg-forest-3"></div>
-      </div>
+    <div id="background">
+      <div
+        class="bg-repeat"
+        data-parallax-speed="2"
+        style="background-image: url(/background/background-1.png)"
+      ></div>
+      <div
+        data-parallax-speed="3"
+        class="bg-repeat"
+        style="background-image: url(/background/background-2.png)"
+      ></div>
+      <img src="/background/background-3.png" draggable="false" />
     </div>
-
-    <!-- <div class="lv1"></div> -->
-
-    <!-- SCRIPTS -->
-    <script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
-    <script src="script.js"></script>
+    <div id="lumio">
+      <img src="/lumio/lumio-1.png" draggable="false" data-frame="1" />
+    </div>
   </body>
 </html>
