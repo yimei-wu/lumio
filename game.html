@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumio</title>
+    <script type="module" src="game.js"></script>
+  </head>
+  <body>
+    <div id="background">
+      <div
+        class="bg-repeat"
+        data-parallax-speed="2"
+        style="background-image: url(/background/background-1.png)"
+      ></div>
+      <div
+        data-parallax-speed="3"
+        class="bg-repeat"
+        style="background-image: url(/background/background-2.png)"
+      ></div>
+      <img src="/background/background-3.png" draggable="false" />
+      <img class="z-10" src="/background/background-4.png" draggable="false" />
+    </div>
+    <div id="lumio">
+      <div id="head-tracker"></div>
+      <img id="head" src="/lumio/lumio-head.png" draggable="false" />
+      <img
+        id="body"
+        src="/lumio/lumio-headless-1.png"
+        draggable="false"
+        data-frame="1"
+      />
+    </div>
+  </body>
+</html>

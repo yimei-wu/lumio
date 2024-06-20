@@ -4,32 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumio</title>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="index.js"></script>
   </head>
   <body>
-    <div id="background">
-      <div
-        class="bg-repeat"
-        data-parallax-speed="2"
-        style="background-image: url(/background/background-1.png)"
-      ></div>
-      <div
-        data-parallax-speed="3"
-        class="bg-repeat"
-        style="background-image: url(/background/background-2.png)"
-      ></div>
-      <img src="/background/background-3.png" draggable="false" />
-      <img class="z-10" src="/background/background-4.png" draggable="false" />
-    </div>
-    <div id="lumio">
-      <div id="head-tracker"></div>
-      <img id="head" src="/lumio/lumio-head.png" draggable="false" />
+    <section
+      id="cover"
+      class="relative grid items-center w-full h-full grid-cols-2"
+    >
       <img
-        id="body"
-        src="/lumio/lumio-headless-1.png"
+        src="./cover/cover-bg.png"
+        class="absolute inset-0 object-cover w-full h-full"
         draggable="false"
-        data-frame="1"
       />
-    </div>
+      <img
+        src="./cover/cover.png"
+        class="absolute inset-0 object-cover w-full h-full"
+        draggable="false"
+      />
+      <div></div>
+      <div class="flex flex-col items-center justify-center w-full h-full">
+        <h1 class="mx-auto">Lumio</h1>
+      </div>
+    </section>
   </body>
 </html>
