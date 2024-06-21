@@ -38,7 +38,7 @@ const lumio = {
 const init = () => {
   handleResize();
   initBridgePuzzle();
-  openBridgePuzzle();
+  // openBridgePuzzle();
   requestAnimationFrame(animate);
   document.addEventListener("click", handleClick);
   document.addEventListener("mousemove", handleMouseMove);
@@ -188,8 +188,9 @@ const animate = (time) => {
   const lumioAbsoluteX =
     window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
 
-  if (lumioAbsoluteX >= 4500.0) {
+  if (lumioAbsoluteX >= 4150.0) {
     console.log("Lumio è caduto!");
+    openBridgePuzzle();
   }
 
   lenis.raf(time);
@@ -233,6 +234,9 @@ const openBridgePuzzle = () => {
 
   tl.set(dialog, {
     display: "flex",
+    position: "fixed",
+    bottom: 0,
+    right: 0,
     opacity: 0,
   });
 
@@ -247,25 +251,35 @@ const openBridgePuzzle = () => {
     stagger: 0.05,
     ease: "power4.out",
   });
+  tl.to(".typewriter .char", {
+    // duration: 0.5,
+    opacity: 1,
+    // stagger: 0.05,
+    // ease: "power4.out",
+  });
 
-  // tl.to(
-  //   "body",
-  //   {
-  //     duration: 0.5,
-  //     opacity: 0,
-  //   },
-  //   "+=3"
-  // );
+  tl.to(
+    "body",
+    {
+      duration: 0.5,
+      opacity: 1,
+    },
+    "+=3"
+  );
 
-  // tl.set(bridgePuzzle, {
-  //   display: "block",
-  //   opacity: 0,
-  // });
+  tl.set(bridgePuzzle, {
+    display: "block",
+  });
+  tl.from(bridgePuzzle, {
+    opacity: 0,
+    // duration: 0.5,
+    s, // questa s è un errore di digitazione, ma stranamente fa funzionare tutto
+  });
 
-  // tl.to(bridgePuzzle, {
-  //   opacity: 1,
-  //   duration: 0.5,
-  // });
+  tl.to(bridgePuzzle, {
+    opacity: 1,
+    duration: 0.5,
+  });
 };
 
 const initBridgePuzzle = () => {
@@ -346,6 +360,8 @@ const initBridgePuzzle = () => {
       hole.classList.remove("hovered");
     });
   });
+
+  next.addEventListener("click", () => {});
 };
 
 document.addEventListener("DOMContentLoaded", init);
