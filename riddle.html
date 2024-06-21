@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lumio</title>
+    <script type="module" src="riddle.js"></script>
+  </head>
+  <body>
+    <section id="dialog" style="display: none">
+      <div class="typewriter">
+        <p>
+          The cave is blocked by a huge rock, there are engravings on it and
+          next to it an epigraph and a crystal
+        </p>
+        <p class="mt-3">Solve the riddle to find the exit</p>
+      </div>
+    </section>
+    <div id="level2">
+      <div class="costellation">
+        <div id="star1" class="star"></div>
+        <div id="star2" class="star"></div>
+        <div id="star3" class="star"></div>
+        <div id="star4" class="star"></div>
+        <div id="star5" class="star"></div>
+        <div id="star6" class="star"></div>
+        <div id="star7" class="star"></div>
+      </div>
+
+      <div class="star-container">
+        <div class="info">
+          <p class="poetry">
+            "If you're lost and seek the road to find,<br />
+            look for the guiding star so kind.<br />
+            Fixed in the sky, the North will show,<br />
+            following the light, freedom will grow."
+          </p>
+          <p class="hint">
+            Click the star indicated by the poem to escape from cave
+          </p>
+        </div>
+        <div class="space">
+          <div id="star"></div>
+        </div>
+      </div>
+      <div id="done" class="pop-up">
+        <p>
+          Fantastic!<br />You find the path of light, now the cave is open.<br />
+          Keep going...
+        </p>
+        <button id="next">next</button>
+      </div>
+    </div>
+    <div id="background">
+      <div
+        class="bg-repeat"
+        data-parallax-speed="2"
+        style="background-image: url(/cave-background/background_cave-1.png)"
+      ></div>
+      <div
+        data-parallax-speed="3"
+        class="bg-repeat"
+        style="background-image: url(/cave-background/background_cave-2.png)"
+      ></div>
+      <img src="/cave-background/background_cave-3.png" draggable="false" />
+      <img
+        class="z-10"
+        src="/cave-background/background_cave-4.png"
+        draggable="false"
+      />
+    </div>
+    <div id="lumio">
+      <div id="head-tracker"></div>
+      <img id="head" src="/lumio/lumio-head.png" draggable="false" />
+      <img
+        id="body"
+        src="/lumio/lumio-headless-1.png"
+        draggable="false"
+        data-frame="1"
+      />
+    </div>
+  </body>
+</html>
