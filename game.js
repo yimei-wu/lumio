@@ -361,7 +361,9 @@ const initBridgePuzzle = () => {
     });
   });
 
-  next.addEventListener("click", () => {});
+  next.addEventListener("click", () => {
+    window.location.href = "/riddle.html";
+  });
 };
 
 document.addEventListener("DOMContentLoaded", init);

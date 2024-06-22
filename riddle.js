@@ -304,9 +304,11 @@ const initCavePuzzle = () => {
     popUp.style.display = "flex";
   });
 
-  //   const next = document.getElementById("next");
+  const next = document.getElementById("next");
 
-  //   next.addEventListener("click", () => {});
+  next.addEventListener("click", () => {
+    window.location.href = "/play.html";
+  });
 };
 
 document.addEventListener("DOMContentLoaded", init);
