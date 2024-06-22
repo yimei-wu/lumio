@@ -455,17 +455,17 @@ body::-webkit-scrollbar {
   transform: translateX(-50%);
 }
 
-#pillar1 {
+.pillar[data-id="1"] {
   left: 19%;
 }
-#pillar2 {
+.pillar[data-id="2"] {
   left: 50%;
 }
-#pillar3 {
+.pillar[data-id="3"] {
   left: 81%;
 }
 
-.bright-pillar {
+.pillar[data-state="on"] {
   height: 80%;
   width: 32%;
   background: url("./pillars/bright-pillar.png") center center;

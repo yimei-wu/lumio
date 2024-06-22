@@ -69,7 +69,6 @@ const popup = new Popup({
 const init = () => {
   loader = new Loader();
   loader.hide();
-
   handleResize();
   initLakePuzzle();
   requestAnimationFrame(animate);
@@ -260,172 +259,39 @@ const scrollStartStopHandler = (element, wait = 150, onStart, onStop) => {
 const initLakePuzzle = () => {
   const pillars = document.querySelectorAll(".pillar");
 
-  const pillarOne = document.getElementById("pillar1");
-  const pillarTwo = document.getElementById("pillar2");
-  const pillarThree = document.getElementById("pillar3");
+  pillars.forEach((pillar) => {
+    pillar.onclick = () => {
+      const id = parseInt(pillar.dataset.id);
+      const state = pillar.dataset.state === "on";
+      pillar.dataset.state = state ? "off" : "on";
 
-  const handleClick = () => {
-    pillars.forEach((pillar) => {
-      pillar.addEventListener("click", (e) => {
-        e.preventDefault();
-        // CLICK ON THE FIRST PILLAR
-        if (pillar === pillarOne) {
-          if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarTwo.classList.replace("pillar", "bright-pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarOne.classList.replace("bright-pillar", "pillar");
-            pillarTwo.classList.replace("pillar", "bright-pillar");
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarOne.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-            pillarThree.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarOne.classList.replace("bright-pillar", "pillar");
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          } else {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-          }
-        }
-        // CLICK ON THE MIDDLE PILLAR
-        else if (pillar === pillarTwo) {
-          if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarTwo.classList.replace("pillar", "bright-pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarOne.classList.replace("bright-pillar", "pillar");
-            pillarTwo.classList.replace("pillar", "bright-pillar");
-            pillarThree.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-            pillarThree.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          } else {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          }
-        }
-        // CLICK ON THE LAST PILLAR
-        else if (pillar === pillarThree) {
-          if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          } else if (
-            (pillarOne.classList.contains("bright-pillar") &&
-              pillarTwo.classList.contains("pillar") &&
-              pillarThree.classList.contains("bright-pillar")) ||
-            (pillarOne.classList.contains("pillar") &&
-              pillarTwo.classList.contains("pillar") &&
-              pillarThree.classList.contains("bright-pillar"))
-          ) {
-            pillarTwo.classList.replace("pillar", "bright-pillar");
-            pillarThree.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("bright-pillar")
-          ) {
-            pillarOne.classList.replace("pillar", "bright-pillar");
-            //   pillarThree.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("bright-pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarOne.classList.replace("bright-pillar", "pillar");
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-          } else if (
-            pillarOne.classList.contains("pillar") &&
-            pillarTwo.classList.contains("bright-pillar") &&
-            pillarThree.classList.contains("pillar")
-          ) {
-            pillarTwo.classList.replace("bright-pillar", "pillar");
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          } else {
-            pillarThree.classList.replace("pillar", "bright-pillar");
-          }
-        }
-      });
-    });
-    checkPillars();
-  };
+      if (id > 1) {
+        const previousPillar = document.querySelector(
+          `.pillar[data-id="${id - 1}"]`
+        );
+        const previousState = previousPillar.dataset.state === "on";
+        previousPillar.dataset.state = previousState ? "off" : "on";
+      }
 
-  pillarOne.addEventListener("click", handleClick);
-  pillarTwo.addEventListener("click", handleClick);
-  pillarThree.addEventListener("click", handleClick);
+      if (id < 3) {
+        const nextPillar = document.querySelector(
+          `.pillar[data-id="${id + 1}"]`
+        );
+        const nextState = nextPillar.dataset.state === "on";
+        nextPillar.dataset.state = nextState ? "off" : "on";
+      }
+      checkPillars();
+    };
+  });
 
-  function checkPillars() {
-    console.log("check pillars is working!");
-    if (
-      pillarOne.classList.contains("bright-pillar") &&
-      pillarTwo.classList.contains("bright-pillar") &&
-      pillarThree.classList.contains("bright-pillar")
-    ) {
+  const checkPillars = () => {
+    const allOn = Array.from(document.querySelectorAll(".pillar")).every(
+      (pillar) => pillar.dataset.state === "on"
+    );
+    if (allOn) {
       popup.open();
     }
-  }
+  };
 };
 
 document.addEventListener("DOMContentLoaded", init);
