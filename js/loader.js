@@ -1,6 +1,6 @@
 import gsap from "gsap";
 
-const DURATION = 3;
+const DURATION = 1.4;
 const EASE = "power4.out";
 
 export class Loader {

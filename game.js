@@ -1,16 +1,22 @@
-import "./game.css";
+// Level 1
+
+import "./style.css";
 import gsap from "gsap";
 import Lenis from "lenis";
 import { debounce } from "lodash";
-import "splitting/dist/splitting.css";
-import "splitting/dist/splitting-cells.css";
-import Splitting from "splitting";
+
+import { Loader } from "./js/loader";
+import { Textbox } from "./js/textbox";
+import { Popup } from "./js/popup";
 
 const lenis = new Lenis({
   orientation: "horizontal",
   gestureOrientation: "both",
   wheelMultiplier: 0.5,
 });
+
+let loader;
+let state = "map";
 
 const bgSizes = {
   width: 9904,
@@ -35,10 +41,38 @@ const lumio = {
   speed: 500, // mezzo secondo
 };
 
+const textbox = new Textbox({
+  text: "The bridge seems to be broken, fix it so Lumio can cross it.\nUse the stones around by clicking and dragging them to the right place.",
+  onClose: () => {
+    lenis.stop();
+    console.log("Opening bridge puzzle");
+    loader.show(() => {
+      gsap.set(textbox.element, { display: "none" });
+      gsap.set("#stone-puzzle", {
+        display: "block",
+        onComplete: () => {
+          loader.hide();
+        },
+      });
+    });
+  },
+});
+
+const popup = new Popup({
+  text: "Good Job!\nThe bridge has been fixed.\nNow Lumio can cross the bridge and get into the cave.",
+  onClose: () => {
+    loader.show(() => {
+      window.location.href = "/riddle.html";
+    });
+  },
+});
+
 const init = () => {
+  loader = new Loader();
+  loader.hide();
+
   handleResize();
   initBridgePuzzle();
-  // openBridgePuzzle();
   requestAnimationFrame(animate);
   document.addEventListener("click", handleClick);
   document.addEventListener("mousemove", handleMouseMove);
@@ -188,9 +222,10 @@ const animate = (time) => {
   const lumioAbsoluteX =
     window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
 
-  if (lumioAbsoluteX >= 4150.0) {
+  if (lumioAbsoluteX >= 4150.0 && state == "map") {
     console.log("Lumio è caduto!");
-    openBridgePuzzle();
+    state = "bridge-puzzle";
+    textbox.open();
   }
 
   lenis.raf(time);
@@ -223,72 +258,12 @@ const scrollStartStopHandler = (element, wait = 150, onStart, onStop) => {
   };
 };
 
-const openBridgePuzzle = () => {
-  lenis.stop();
-
-  Splitting({ target: ".typewriter", by: "chars" });
-
-  const bridgePuzzle = document.getElementById("stone-puzzle");
-  const dialog = document.querySelector("#dialog");
-  const tl = gsap.timeline();
-
-  tl.set(dialog, {
-    display: "flex",
-    position: "fixed",
-    bottom: 0,
-    right: 0,
-    opacity: 0,
-  });
-
-  tl.to(dialog, {
-    duration: 0.5,
-    opacity: 1,
-  });
-
-  tl.from(".typewriter .char", {
-    duration: 0.5,
-    opacity: 0,
-    stagger: 0.05,
-    ease: "power4.out",
-  });
-  tl.to(".typewriter .char", {
-    // duration: 0.5,
-    opacity: 1,
-    // stagger: 0.05,
-    // ease: "power4.out",
-  });
-
-  tl.to(
-    "body",
-    {
-      duration: 0.5,
-      opacity: 1,
-    },
-    "+=3"
-  );
-
-  tl.set(bridgePuzzle, {
-    display: "block",
-  });
-  tl.from(bridgePuzzle, {
-    opacity: 0,
-    // duration: 0.5,
-    s, // questa s è un errore di digitazione, ma stranamente fa funzionare tutto
-  });
-
-  tl.to(bridgePuzzle, {
-    opacity: 1,
-    duration: 0.5,
-  });
-};
-
 const initBridgePuzzle = () => {
   // get all the holes html nodes
   const holes = document.querySelectorAll(".hole");
   // get all the pieces html nodes
   const images = Array.from(document.querySelectorAll(".image"));
   let winCount = 0;
-  const next = document.getElementById("next");
   /* 
  for each piece:
  - add an event listener that ADDS the .dragging class when the drag STARTS
@@ -351,18 +326,13 @@ const initBridgePuzzle = () => {
         console.log(winCount);
 
         if (winCount === 3) {
-          const popUp = document.getElementById("pop");
-          popUp.style.display = "flex";
+          popup.open();
         }
       }
 
       // remove the .hovered class from the hole
       hole.classList.remove("hovered");
     });
-  });
-
-  next.addEventListener("click", () => {
-    window.location.href = "/riddle.html";
   });
 };
 

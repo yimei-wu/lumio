@@ -1,17 +1,14 @@
 import { getRandomId } from "./randomId";
-import "splitting/dist/splitting.css";
-import "splitting/dist/splitting-cells.css";
-import Splitting from "splitting";
 import gsap from "gsap";
 
-export class Textbox {
+export class Popup {
   constructor({ text, onClose }) {
     this.text = text;
     this.timeline = gsap.timeline();
     this.element = null;
 
     // Genero un ID casuale per l'elemento
-    this.id = getRandomId("textbox-");
+    this.id = getRandomId("popup-");
 
     // Creo l'elemento
     this.create();
@@ -35,25 +32,23 @@ export class Textbox {
     const lines = this.text.split("\n");
 
     // Creo l'elemento HTML
-    this.element = document.createElement("section");
+    this.element = document.createElement("div");
     this.element.id = this.id;
+    this.element.classList.add("pop-up");
     this.element.style.display = "none";
     this.element.innerHTML = `
-      <div>
-      ${lines
-        .map((line, index) =>
-          index === 0 ? `<p>${line}</p>` : `<p class="mt-3">${line}</p>`
-        )
-        .join("")}
-      </div> 
-      <button class="mt-6">Next…</button>
+        <div>
+        ${lines
+          .map((line, index) =>
+            index === 0 ? `<p>${line}</p>` : `<p class="mt-3">${line}</p>`
+          )
+          .join("")}
+        </div>
+        <button id="next">next</button>
       `;
 
     // Aggiungo l'elemento al body come primo child
     document.body.prepend(this.element);
-
-    // Applico Splitting.js all'elemento
-    Splitting({ target: `#${this.id} div`, by: "chars" });
   }
 
   open() {
@@ -65,19 +60,6 @@ export class Textbox {
     this.timeline.to(this.element, {
       duration: 0.5,
       opacity: 1,
-    });
-
-    this.timeline.from(`#${this.id} .char`, {
-      duration: 0.5,
-      opacity: 0,
-      stagger: 0.05,
-      ease: "power4.out",
-    });
-
-    this.timeline.from(`#${this.id} button`, {
-      duration: 0.5,
-      opacity: 0,
-      ease: "power4.out",
     });
   }
 

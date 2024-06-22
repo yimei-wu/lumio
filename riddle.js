@@ -1,16 +1,19 @@
-import "./riddle.css";
+import "./style.css";
 import gsap from "gsap";
 import Lenis from "lenis";
 import { debounce } from "lodash";
-import "splitting/dist/splitting.css";
-import "splitting/dist/splitting-cells.css";
-import Splitting from "splitting";
+import { Loader } from "./js/loader";
+import { Textbox } from "./js/textbox";
+import { Popup } from "./js/popup";
 
 const lenis = new Lenis({
   orientation: "horizontal",
   gestureOrientation: "both",
   wheelMultiplier: 0.5,
 });
+
+let loader;
+let state = "map";
 
 const bgSizes = {
   width: 7428,
@@ -24,6 +27,32 @@ const screen = {
 
 let startTime = null;
 
+const textbox = new Textbox({
+  text: "The cave is blocked by a huge rock, there are engravings on it and next to it an epigraph and a crystal.\nSolve the riddle to find the exit.",
+  onClose: () => {
+    lenis.stop();
+    console.log("Opening cave puzzle");
+    loader.show(() => {
+      gsap.set(textbox.element, { display: "none" });
+      gsap.set("#cave", {
+        display: "block",
+        onComplete: () => {
+          loader.hide();
+        },
+      });
+    });
+  },
+});
+
+const popup = new Popup({
+  text: "Fantastic!\nYou found the path of light, now the cave is open\nKeep going…",
+  onClose: () => {
+    loader.show(() => {
+      window.location.href = "/play.html";
+    });
+  },
+});
+
 const lumio = {
   el: document.querySelector("#lumio"),
   img: document.querySelector("#lumio #body"),
@@ -36,6 +65,8 @@ const lumio = {
 };
 
 const init = () => {
+  loader = new Loader();
+  loader.hide();
   handleResize();
   initCavePuzzle();
   requestAnimationFrame(animate);
@@ -187,9 +218,10 @@ const animate = (time) => {
   const lumioAbsoluteX =
     window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
 
-  if (lumioAbsoluteX >= 3650.0) {
+  if (lumioAbsoluteX >= 3650.0 && state == "map") {
     console.log("Lumio è arrivato!");
-    openCavePuzzle();
+    state = "cave-puzzle";
+    textbox.open();
   }
 
   lenis.raf(time);
@@ -222,65 +254,6 @@ const scrollStartStopHandler = (element, wait = 150, onStart, onStop) => {
   };
 };
 
-const openCavePuzzle = () => {
-  lenis.stop();
-
-  Splitting({ target: ".typewriter", by: "chars" });
-
-  const cavePuzzle = document.getElementById("cave");
-  const dialog = document.querySelector("#dialog");
-  const tl = gsap.timeline();
-
-  tl.set(dialog, {
-    display: "flex",
-    position: "fixed",
-    bottom: 0,
-    right: 0,
-    opacity: 0,
-  });
-
-  tl.to(dialog, {
-    duration: 0.5,
-    opacity: 1,
-  });
-
-  tl.from(".typewriter .char", {
-    duration: 0.5,
-    opacity: 0,
-    stagger: 0.05,
-    ease: "power4.out",
-  });
-  tl.to(".typewriter .char", {
-    // duration: 0.5,
-    opacity: 1,
-    // stagger: 0.05,
-    // ease: "power4.out",
-  });
-
-  tl.to(
-    "body",
-    {
-      duration: 0.5,
-      opacity: 1,
-    },
-    "+=3"
-  );
-
-  tl.set(cavePuzzle, {
-    display: "block",
-  });
-  tl.from(cavePuzzle, {
-    opacity: 0,
-    // duration: 0.5,
-    s,
-  });
-
-  tl.to(cavePuzzle, {
-    opacity: 1,
-    duration: 0.5,
-  });
-};
-
 const initCavePuzzle = () => {
   const stars = document.querySelectorAll(".star");
   const theStar = document.getElementById("star7");
@@ -299,15 +272,7 @@ const initCavePuzzle = () => {
     stars.forEach((s) => s.classList.replace("wrong-star", "star"));
     theStar.classList.replace("star", "star-inserted");
     poleStar.style.display = "none";
-
-    const popUp = document.getElementById("done");
-    popUp.style.display = "flex";
-  });
-
-  const next = document.getElementById("next");
-
-  next.addEventListener("click", () => {
-    window.location.href = "/play.html";
+    popup.open();
   });
 };
 

@@ -1,16 +1,21 @@
-import "./play.css";
+import "./style.css";
+
 import gsap from "gsap";
 import Lenis from "lenis";
 import { debounce } from "lodash";
-import "splitting/dist/splitting.css";
-import "splitting/dist/splitting-cells.css";
-import Splitting from "splitting";
+
+import { Loader } from "./js/loader";
+import { Textbox } from "./js/textbox";
+import { Popup } from "./js/popup";
 
 const lenis = new Lenis({
   orientation: "horizontal",
   gestureOrientation: "both",
   wheelMultiplier: 0.5,
 });
+
+let loader;
+let state = "map";
 
 const bgSizes = {
   width: 7428,
@@ -35,7 +40,36 @@ const lumio = {
   speed: 500, // mezzo secondo
 };
 
+const textbox = new Textbox({
+  text: "The lake prevents Lumio from continuing.\nSome stones nearby are suspicious, light up all the pillars to find out what happens.",
+  onClose: () => {
+    lenis.stop();
+    console.log("Opening lake puzzle");
+    loader.show(() => {
+      gsap.set(textbox.element, { display: "none" });
+      gsap.set("#pillar-game", {
+        display: "block",
+        onComplete: () => {
+          loader.hide();
+        },
+      });
+    });
+  },
+});
+
+const popup = new Popup({
+  text: "That's Awasome!\nYou light up all the pillars\nNow Lumio can go on.",
+  onClose: () => {
+    loader.show(() => {
+      window.location.href = "/end.html";
+    });
+  },
+});
+
 const init = () => {
+  loader = new Loader();
+  loader.hide();
+
   handleResize();
   initLakePuzzle();
   requestAnimationFrame(animate);
@@ -187,9 +221,10 @@ const animate = (time) => {
   const lumioAbsoluteX =
     window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
 
-  if (lumioAbsoluteX >= 1200.0) {
+  if (lumioAbsoluteX >= 1200.0 && state == "map") {
     console.log("Lumio è al lago!");
-    openLakePuzzle();
+    state = "lake-puzzle";
+    textbox.open();
   }
 
   lenis.raf(time);
@@ -220,65 +255,6 @@ const scrollStartStopHandler = (element, wait = 150, onStart, onStop) => {
   return {
     destroy: destroy,
   };
-};
-
-const openLakePuzzle = () => {
-  lenis.stop();
-
-  Splitting({ target: ".typewriter", by: "chars" });
-
-  const lakePuzzle = document.getElementById("pillar-game");
-  const dialog = document.querySelector("#dialog");
-  const tl = gsap.timeline();
-
-  tl.set(dialog, {
-    display: "flex",
-    position: "fixed",
-    bottom: 0,
-    right: 0,
-    opacity: 0,
-  });
-
-  tl.to(dialog, {
-    duration: 0.5,
-    opacity: 1,
-  });
-
-  tl.from(".typewriter .char", {
-    duration: 0.5,
-    opacity: 0,
-    stagger: 0.05,
-    ease: "power4.out",
-  });
-  tl.to(".typewriter .char", {
-    // duration: 0.5,
-    opacity: 1,
-    // stagger: 0.05,
-    // ease: "power4.out",
-  });
-
-  tl.to(
-    "body",
-    {
-      duration: 0.5,
-      opacity: 1,
-    },
-    "+=3"
-  );
-
-  tl.set(lakePuzzle, {
-    display: "flex",
-  });
-  tl.from(lakePuzzle, {
-    opacity: 0,
-    // duration: 0.5,
-    s,
-  });
-
-  tl.to(lakePuzzle, {
-    opacity: 1,
-    duration: 0.5,
-  });
 };
 
 const initLakePuzzle = () => {
@@ -431,7 +407,6 @@ const initLakePuzzle = () => {
             pillarThree.classList.replace("pillar", "bright-pillar");
           }
         }
-        // checkPillars();
       });
     });
     checkPillars();
@@ -445,18 +420,12 @@ const initLakePuzzle = () => {
     console.log("check pillars is working!");
     if (
       pillarOne.classList.contains("bright-pillar") &&
-      pillarTwo.classList.contains("brigth-pillar") &&
-      pillarThree.classList.contains("brigth-pillar")
+      pillarTwo.classList.contains("bright-pillar") &&
+      pillarThree.classList.contains("bright-pillar")
     ) {
-      const popUp = document.getElementById("win");
-      popUp.style.display = "flex";
-      console.log("all three ON");
+      popup.open();
     }
   }
-
-  next.addEventListener("click", () => {
-    window.location.href = "/.html";
-  });
 };
 
 document.addEventListener("DOMContentLoaded", init);

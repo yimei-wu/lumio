@@ -10,6 +10,7 @@ export default defineConfig({
         game: resolve(__dirname, "game.html"),
         riddle: resolve(__dirname, "riddle.html"),
         play: resolve(__dirname, "play.html"),
+        end: resolve(__dirname, "end.html"),
       },
     },
   },
