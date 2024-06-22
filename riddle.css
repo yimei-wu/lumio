@@ -53,7 +53,7 @@ body::-webkit-scrollbar {
   --x: -50%;
   --scale: 1;
   position: fixed;
-  bottom: 10svh;
+  bottom: 5svh;
   left: 50%;
   transform: translateX(var(--x)) scaleX(var(--scale));
   transform-origin: center;
@@ -88,8 +88,15 @@ body::-webkit-scrollbar {
   pointer-events: none;
 }
 
-#level2 {
-    background: url("./Cave_Closed.jpg");
+#cave {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    opacity: 1;
+    display: none;
+}
+.costellation{
+    background: url("./stars/Cave_Closed.jpg");
     height: 100%;
     width: 100%;
     position: relative;
@@ -100,7 +107,7 @@ body::-webkit-scrollbar {
     position: fixed;
     height: 50px;
     width: 50px;
-    background: url("./Stars.png") center center;
+    background: url("./stars/Stars.png") center center;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -198,7 +205,7 @@ body::-webkit-scrollbar {
     grid-column-end: 4; */
     height: 100%;
     width: 100%;
-    background: url("./Star.png") center center;
+    background: url("./stars/Star.png") center center;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -208,7 +215,7 @@ body::-webkit-scrollbar {
     position: fixed;
     height: 70px;
     width: 70px;
-    background: url("./Star.png") center center;
+    background: url("./stars/Star.png") center center;
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -217,14 +224,14 @@ body::-webkit-scrollbar {
     position: fixed;
     height: 50px;
     width: 50px;
-    background: url("./wrong-star.png") center center;
+    background: url("./stars/wrong-star.png") center center;
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 
 /* POP UP */
-#level2 .pop-up {
+#cave .pop-up {
     height: 65vh;
     width: 60vw;
     position: absolute;
@@ -240,11 +247,11 @@ body::-webkit-scrollbar {
     text-align: center;
     z-index: 200;
 }
-#level2 .pop-up p {
+#cave .pop-up p {
     font-size: 1.7rem;
     width: 40vw;
 }
-#level2 .pop-up button {
+#cave .pop-up button {
     padding: 0.5rem 1.5rem;
     background-color: #343434;
     color: #fff;
@@ -252,12 +259,23 @@ body::-webkit-scrollbar {
     font-size: 1.7rem;
     margin-top: 3.5rem;
 }
-#level2 .pop-up button:hover {
+#cave .pop-up button:hover {
     background-color: #535353;
     /* box-shadow: inset 0px 0px 6px 0px #ffffffd7;   */
 }
   
-#done {
+#cave #done {
     display: none;
 }
-  /* --- */
+/* --- */
+
+#dialog {
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    color: white;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    @apply items-center justify-center px-16 text-4xl;
+}

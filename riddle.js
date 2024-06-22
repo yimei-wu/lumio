@@ -13,7 +13,7 @@ const lenis = new Lenis({
 });
 
 const bgSizes = {
-  width: 9904,
+  width: 7428,
   height: 1392,
 };
 
@@ -183,6 +183,15 @@ const animate = (time) => {
     lumio.img.src = `/lumio/lumio-headless-${frame}.png`;
   }
 
+  // Fermo Lumio quando arrivo alla fine della caverna
+  const lumioAbsoluteX =
+    window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
+
+  if (lumioAbsoluteX >= 3650.0) {
+    console.log("Lumio è arrivato!");
+    openCavePuzzle();
+  }
+
   lenis.raf(time);
   requestAnimationFrame(animate);
 };
@@ -218,7 +227,7 @@ const openCavePuzzle = () => {
 
   Splitting({ target: ".typewriter", by: "chars" });
 
-  const cavePuzzle = document.getElementById("level2");
+  const cavePuzzle = document.getElementById("cave");
   const dialog = document.querySelector("#dialog");
   const tl = gsap.timeline();
 
@@ -263,10 +272,10 @@ const openCavePuzzle = () => {
   tl.from(cavePuzzle, {
     opacity: 0,
     // duration: 0.5,
-    s, // questa s è un errore di digitazione, ma stranamente fa funzionare tutto
+    s,
   });
 
-  tl.to(bridgePuzzle, {
+  tl.to(cavePuzzle, {
     opacity: 1,
     duration: 0.5,
   });
@@ -295,7 +304,9 @@ const initCavePuzzle = () => {
     popUp.style.display = "flex";
   });
 
-  next.addEventListener("click", () => {});
+  //   const next = document.getElementById("next");
+
+  //   next.addEventListener("click", () => {});
 };
 
 document.addEventListener("DOMContentLoaded", init);
