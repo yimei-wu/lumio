@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FONT */
 @font-face {
   font-family: "Indie Flower";
   src: url("./font/IndieFlower.woff") format("woff");
@@ -25,6 +24,27 @@ body {
   @apply w-full bg-black h-svh;
 }
 
+[id^="textbox-"] {
+  position: absolute;
+  z-index: 90;
+  inset: 0;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  font-size: 2.25rem /* 36px */;
+  line-height: 2.5rem /* 40px */;
+}
+
+/* 
+
+Intro screen
+
+*/
+
 h1 {
   font-family: "Chelsea Market";
   @apply z-10 text-[13vw] text-white uppercase;
@@ -39,14 +59,4 @@ button#start {
   padding: 10px 20px;
   border: 1px solid white;
   z-index: 10;
-}
-
-#dialog {
-  position: absolute;
-  inset: 0;
-  background-color: black;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  @apply items-center justify-center px-16 text-4xl;
 }
