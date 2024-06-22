@@ -54,7 +54,7 @@ body::-webkit-scrollbar {
   --scale: 1;
   position: fixed;
   bottom: 8svh;
-  left: 10%;
+  left: 15%;
   transform: translateX(var(--x)) scaleX(var(--scale));
   transform-origin: center;
 }
@@ -175,4 +175,16 @@ body::-webkit-scrollbar {
   
 #pillar-game #win {
     display: none;
+}
+  
+  
+#dialog {
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    color: white;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    @apply items-center justify-center px-16 text-4xl;
 }

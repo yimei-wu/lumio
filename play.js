@@ -234,6 +234,8 @@ const openLakePuzzle = () => {
   tl.set(dialog, {
     display: "flex",
     position: "fixed",
+    bottom: 0,
+    right: 0,
     opacity: 0,
   });
 
@@ -267,10 +269,11 @@ const openLakePuzzle = () => {
   tl.set(lakePuzzle, {
     display: "flex",
   });
-  //   tl.from(lakePuzzle, {
-  //     opacity: 0,
-  //     // duration: 0.5,
-  //   });
+  tl.from(lakePuzzle, {
+    opacity: 0,
+    // duration: 0.5,
+    s,
+  });
 
   tl.to(lakePuzzle, {
     opacity: 1,
@@ -431,7 +434,7 @@ const initLakePuzzle = () => {
         // checkPillars();
       });
     });
-    // checkPillars();
+    checkPillars();
   };
 
   pillarOne.addEventListener("click", handleClick);
