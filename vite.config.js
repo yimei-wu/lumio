@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, "index.html"),
         game: resolve(__dirname, "game.html"),
+        riddle: resolve(__dirname, "riddle.html"),
       },
     },
   },
