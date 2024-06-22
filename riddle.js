@@ -1,4 +1,4 @@
-import "./game.css";
+import "./riddle.css";
 import gsap from "gsap";
 import Lenis from "lenis";
 import { debounce } from "lodash";
