@@ -53,8 +53,8 @@ body::-webkit-scrollbar {
   --x: -50%;
   --scale: 1;
   position: fixed;
-  bottom: 10svh;
-  left: 50%;
+  bottom: 8svh;
+  left: 10%;
   transform: translateX(var(--x)) scaleX(var(--scale));
   transform-origin: center;
 }

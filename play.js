@@ -38,7 +38,6 @@ const lumio = {
 const init = () => {
   handleResize();
   initLakePuzzle();
-  //   openLakePuzzle()
   requestAnimationFrame(animate);
   document.addEventListener("click", handleClick);
   document.addEventListener("mousemove", handleMouseMove);
@@ -188,7 +187,7 @@ const animate = (time) => {
   const lumioAbsoluteX =
     window.scrollX + parseFloat(window.getComputedStyle(lumio.el).left);
 
-  if (lumioAbsoluteX >= 4000.0) {
+  if (lumioAbsoluteX >= 1200.0) {
     console.log("Lumio è al lago!");
     openLakePuzzle();
   }
@@ -235,8 +234,6 @@ const openLakePuzzle = () => {
   tl.set(dialog, {
     display: "flex",
     position: "fixed",
-    bottom: 0,
-    right: 0,
     opacity: 0,
   });
 
@@ -268,13 +265,12 @@ const openLakePuzzle = () => {
   );
 
   tl.set(lakePuzzle, {
-    display: "block",
+    display: "flex",
   });
-  tl.from(lakePuzzle, {
-    opacity: 0,
-    // duration: 0.5,
-    s, // questa s è un errore di digitazione, ma stranamente fa funzionare tutto
-  });
+  //   tl.from(lakePuzzle, {
+  //     opacity: 0,
+  //     // duration: 0.5,
+  //   });
 
   tl.to(lakePuzzle, {
     opacity: 1,
