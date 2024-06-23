@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Indie Flower";
-  src: url("./font/IndieFlower.woff") format("woff");
+  src: url("./public/font/IndieFlower.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "Chelsea Market";
-  src: url("./font/ChelseaMarket-Regular.woff") format("woff");
+  src: url("./public/font/ChelseaMarket-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -108,7 +108,7 @@ Game screen
 /* FONT */
 @font-face {
   font-family: "Indie Flower";
-  src: url("./font/IndieFlower.woff") format("woff");
+  src: url("./public/font/IndieFlower.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -197,7 +197,7 @@ body::-webkit-scrollbar {
 
 .stone-puzzle-container {
   background-color: black;
-  background: url("./bridge/bridge.jpg") center center;
+  background: url("./public/bridge/bridge.jpg") center center;
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
@@ -243,7 +243,7 @@ body::-webkit-scrollbar {
   cursor: grabbing;
 }
 .box1 .image {
-  background: url("./bridge/stone-1.png") center center;
+  background: url("./public/bridge/stone-1.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
   height: 90%;
@@ -251,7 +251,7 @@ body::-webkit-scrollbar {
   margin-left: 5%;
 }
 .box2 .image {
-  background: url("./bridge/stone-2.png");
+  background: url("./public/bridge/stone-2.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 80%;
@@ -259,7 +259,7 @@ body::-webkit-scrollbar {
   margin-left: 10%;
 }
 .box3 .image {
-  background: url("./bridge/stone-3.png");
+  background: url("./public/bridge/stone-3.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 80%;
@@ -286,7 +286,7 @@ body::-webkit-scrollbar {
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 7;
-  background: url("./bridge/empty-stone-1.png") center center;
+  background: url("./public/bridge/empty-stone-1.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -295,7 +295,7 @@ body::-webkit-scrollbar {
   grid-column-end: 3;
   grid-row-start: 4;
   grid-row-end: 7;
-  background: url("./bridge/stone-1.png") center center;
+  background: url("./public/bridge/stone-1.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -305,7 +305,7 @@ body::-webkit-scrollbar {
   grid-column-end: 4;
   grid-row-start: 6;
   grid-row-end: 9;
-  background: url("./bridge/empty-stone-2.png") center center;
+  background: url("./public/bridge/empty-stone-2.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -314,7 +314,7 @@ body::-webkit-scrollbar {
   grid-column-end: 4;
   grid-row-start: 6;
   grid-row-end: 9;
-  background: url("./bridge/stone-2.png") center center;
+  background: url("./public/bridge/stone-2.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -325,7 +325,7 @@ body::-webkit-scrollbar {
   grid-column-end: 5;
   grid-row-start: 3;
   grid-row-end: 6;
-  background: url("./bridge/empty-stone-3.png") center center;
+  background: url("./public/bridge/empty-stone-3.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -334,7 +334,7 @@ body::-webkit-scrollbar {
   grid-column-end: 5;
   grid-row-start: 3;
   grid-row-end: 6;
-  background: url("./bridge/stone-3.png") center center;
+  background: url("./public/bridge/stone-3.png") center center;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -436,7 +436,7 @@ body::-webkit-scrollbar {
 .pillars-container {
   height: 100%;
   width: 100%;
-  background: url("./pillars/background-pillars.png") center center;
+  background: url("./public/pillars/background-pillars.png") center center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -447,7 +447,7 @@ body::-webkit-scrollbar {
 .pillar {
   height: 80%;
   width: 32%;
-  background: url("./pillars/bright-pillar-off.png") center center;
+  background: url("./public/pillars/bright-pillar-off.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
@@ -468,7 +468,7 @@ body::-webkit-scrollbar {
 .pillar[data-state="on"] {
   height: 80%;
   width: 32%;
-  background: url("./pillars/bright-pillar.png") center center;
+  background: url("./public/pillars/bright-pillar.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
@@ -488,7 +488,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 .costellation {
-  background: url("./stars/Cave_Closed.jpg");
+  background: url("./public/stars/Cave_Closed.jpg");
   height: 100%;
   width: 100%;
   position: relative;
@@ -499,7 +499,7 @@ body::-webkit-scrollbar {
   position: fixed;
   height: 50px;
   width: 50px;
-  background: url("./stars/Stars.png") center center;
+  background: url("./public/stars/Stars.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -563,7 +563,7 @@ body::-webkit-scrollbar {
 .star-container #star {
   height: 100%;
   width: 100%;
-  background: url("./stars/Star.png") center center;
+  background: url("./public/stars/Star.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -573,7 +573,7 @@ body::-webkit-scrollbar {
   position: fixed;
   height: 70px;
   width: 70px;
-  background: url("./stars/Star.png") center center;
+  background: url("./public/stars/Star.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -582,7 +582,7 @@ body::-webkit-scrollbar {
   position: fixed;
   height: 50px;
   width: 50px;
-  background: url("./stars/wrong-star.png") center center;
+  background: url("./public/stars/wrong-star.png") center center;
   background-repeat: no-repeat;
   background-size: contain;
 }
