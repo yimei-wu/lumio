@@ -390,8 +390,8 @@ body::-webkit-scrollbar {
   --x: -50%;
   --scale: 1;
   position: fixed;
-  bottom: 8svh;
-  left: 15%;
+  bottom: 7svh;
+  left: 20%;
   transform: translateX(var(--x)) scaleX(var(--scale));
   transform-origin: center;
 }
@@ -504,58 +504,30 @@ body::-webkit-scrollbar {
   background-size: contain;
 }
 #star1 {
-  /* grid-column-start: 12;
-    grid-column-end: 13;
-    grid-row-start: 23;
-    grid-row-end: 24; */
   top: 28vh;
   left: 34vw;
 }
 #star2 {
-  /* grid-column-start: 20;
-    grid-column-end: 21;
-    grid-row-start: 15;
-    grid-row-end: 16; */
   top: 40vh;
   left: 21vw;
 }
 #star3 {
-  /* grid-column-start: 16;
-    grid-column-end: 17;
-    grid-row-start: 29;
-    grid-row-end: 30; */
   top: 52vh;
   left: 26vw;
 }
 #star4 {
-  /* grid-column-start: 22;
-    grid-column-end: 23;
-    grid-row-start: 22;
-    grid-row-end: 23; */
   top: 39vh;
   left: 36vw;
 }
 #star5 {
-  /* grid-column-start: 29;
-    grid-column-end: 30;
-    grid-row-start: 19;
-    grid-row-end: 20; */
   top: 32vh;
   left: 53vw;
 }
 #star6 {
-  /* grid-column-start: 36;
-    grid-column-end: 37;
-    grid-row-start: 22;
-    grid-row-end: 23; */
   top: 39vh;
   left: 67vw;
 }
 #star7 {
-  /* grid-column-start: 42;
-    grid-column-end: 43;
-    grid-row-start: 29;
-    grid-row-end: 30; */
   top: 53vh;
   left: 79vw;
 }
@@ -569,8 +541,6 @@ body::-webkit-scrollbar {
   width: 100vw;
   height: 25vh;
   background-color: #2b2b2bbb;
-  /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -581,8 +551,6 @@ body::-webkit-scrollbar {
   font-weight: 100;
 }
 .star-container .poetry {
-  /* grid-column-start: 1;
-    grid-column-end: 3; */
   letter-spacing: 0.05rem;
   font-size: 20px;
   margin-bottom: 1rem;
@@ -593,8 +561,6 @@ body::-webkit-scrollbar {
   width: 150px;
 }
 .star-container #star {
-  /* grid-column-start: 3;
-    grid-column-end: 4; */
   height: 100%;
   width: 100%;
   background: url("./stars/Star.png") center center;
@@ -623,4 +589,11 @@ body::-webkit-scrollbar {
 
 #cave #done {
   display: none;
+}
+#the-end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  height: 100svh;
 }
